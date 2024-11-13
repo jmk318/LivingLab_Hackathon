@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholarship Application</title>
+</head>
+<body>
+
+<!-- 국가 근로 장학금 -->
+<h2>국가 근로 장학금 지원자격</h2>
+<p>2023년/2024년 기준 신청일정:</p>
+<ul>
+    <li>1차: 2023. 11. 22. (수) 9시 ~ 2023. 12. 27. (수)</li>
+    <li>2차: 2024. 02. 01. (목) ~ 2024. 03. 14. (목) 18시</li>
+</ul>
+
+<p>직전 학기 CO 수준 (70점/100점 만점) 이상인가요?</p>
+<input type="radio" name="option1" id="box1"> <label for="box1"> 네 </label><br>
+<input type="radio" name="option1" id="box2"> <label for="box2"> 아니요 </label><br>
+
+<!-- 대통령 과학 장학금 -->
+<h2>대통령 과학 장학금 지원자격</h2>
+<p>2023년 기준 신청일정:</p>
+<ul>
+    <li>국내 1학년: 2023. 03. 06. (월) 15시 ~ 2023. 03. 20. (월) 24시</li>
+    <li>국내 3학년: 2023. 03. 13. (월) 15시 ~ 2023. 04. 03. (월) 24시</li>
+</ul>
+
+<p>과학고를 나왔나요?</p>
+<input type="radio" name="option2" id="box3"> <label for="box3"> 네 </label><br>
+<input type="radio" name="option2" id="box4"> <label for="box4"> 아니요 </label><br>
+
+<p>석차 4등급 이내 과목 10과목 이상 또는 24단위 이상 이수하셨나요?</p>
+<input type="radio" name="option3" id="box5"> <label for="box5"> 네 </label><br>
+<input type="radio" name="option3" id="box6"> <label for="box6"> 아니요 </label><br>
+
+<p>-------------------------------------------------------------------------------------------------------</p>
+<!-- 일반고 -->
+<p>일반고를 나왔나요?</p>
+<input type="radio" name="option4" id="box7"> <label for="box7"> 네 </label><br>
+<input type="radio" name="option4" id="box8"> <label for="box8"> 아니요 </label><br>
+
+<p>석차 3등급 이내 과목 10과목 이상 또는 24단위 이상 이수하셨나요?</p>
+<input type="radio" name="option5" id="box9"> <label for="box9"> 네 </label><br>
+<input type="radio" name="option5" id="box10"> <label for="box10"> 아니요 </label><br>
+
+<p>-------------------------------------------------------------------------------------------------------</p>
+<!-- 영재학교 -->
+<p>영재고를 나왔나요?</p>
+<input type="radio" name="option6" id="box11"> <label for="box11"> 네 </label><br>
+<input type="radio" name="option6" id="box12"> <label for="box12"> 아니요 </label><br>
+
+<p>A- 학점 이상 과목 10과목 이상 또는 24단위 이상 이수하셨나요?</p>
+<input type="radio" name="option7" id="box13"> <label for="box13"> 네 </label><br>
+<input type="radio" name="option7" id="box14"> <label for="box14"> 아니요 </label><br>
+<!-- Add the relevant information and questions for 영재학교 -->
+
+<!-- 국가 우수 장학금 (이공계) -->
+<h2>국가 우수 장학금 (이공계) 지원자격</h2>
+<p>2024년 기준 신청일정:</p>
+<ul>
+    <li>2024. 01. 19. (금) ~ 2024. 02. 22. (목) 24시</li>
+</ul>
+
+<p>국내 4년제 대학 자연과학 및 공학계열 학과(부)에 재학 중인 1학년인가요?</p>
+<input type="radio" name="option8" id="box15"> <label for="box15"> 네 </label><br>
+<input type="radio" name="option8" id="box16"> <label for="box16"> 아니요 </label><br>
+
+<p>당해 년도에 입학한 신입생이면서 대학의 추천을 받았나요?</p>
+<input type="radio" name="option9" id="box17"> <label for="box17"> 네 </label><br>
+<input type="radio" name="option9" id="box18"> <label for="box18"> 아니요 </label><br>
+
+
+
+<!-- Submit button -->
+<button type="button" onclick="submitForm('https://4ebanmx5qi4zz7tvxxdtx4fwua0ykgbk.lambda-url.ap-northeast-2.on.aws/')">Submit</button>
+
+<script>
+    function submitForm(lambdaUrl) {
+        // Create a query string based on the selected options
+        const queryString = getSelectedOptionsQueryString();
+
+        // Combine the Lambda URL with the query string
+        const urlWithQuery = lambdaUrl + '?' + queryString;
+
+        // Make a GET request to the Lambda function
+        fetch(urlWithQuery)
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data as needed
+                handleScholarshipResult(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function getSelectedOptionsQueryString() {
+        // Implement this function to gather selected options and create a query string
+        return 'box1' + =&option2=no&option3=yes';
+    }
+
+    function handleScholarshipResult(data) {
+        // Check if the user is eligible for the scholarship based on the response
+        const isEligible = data.eligibleForScholarship; // Adjust this based on your Lambda response structure
+
+        // Display a message to the user
+        if (isEligible) {
+            alert('축하합니다! 해당 장학금을 수여할 수 있습니다.');
+        } else {
+            alert('죄송합니다. 해당 장학금을 수여할 수 없습니다.');
+        }
+    }
+</script>
+
+</script>
+
+</body>
+</html>
